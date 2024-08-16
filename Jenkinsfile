@@ -5,7 +5,7 @@ pipeline
     agent any
     stages
     {
-        stage('ContDownload_Master')
+        stage('ContDownload_Loans')
         {
             steps
             {
@@ -15,7 +15,7 @@ pipeline
                 }
             }
         }
-        stage('ContBuild_Master')
+        stage('ContBuild_Loans')
         {
             steps
             {
@@ -25,42 +25,6 @@ pipeline
                 }
             }
         }
-        stage('ContDeployment_Master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.deployTomcat("DeclarativePipelinewithSharedLibraries","172.31.82.221","testapp")
-                }
-            }
-            
-        }
-        stage('ContTesting_Master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.gitDownload("FunctionalTesting")
-                    cicd.runSelenium("DeclarativePipelinewithSharedLibraries")
-                }
-            }
-        }
-        stage('ContDelivery_Master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.deployTomcat("DeclarativePipelinewithSharedLibraries","172.31.85.138","prodapp")
-                }
-            }
-        }
-        
-        
-        
-        
         
     }
 }
